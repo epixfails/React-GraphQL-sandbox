@@ -1,0 +1,4 @@
+node_modules
+App/public
+config/db.js
+.DS_Store
