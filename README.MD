@@ -1,4 +1,4 @@
-## GraphQL client-server CRUD  
+## GraphQL sandbox
 
 create, read, update, delete.  
 Frontend: React-redux, redux-saga, styled-components, axios using GraphQL queries  
