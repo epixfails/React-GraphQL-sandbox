@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/epixfails/graphQLstarter.git"
+    "url": "git+https://github.com/epixfails/React-GraphQL-sandbox.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/epixfails/graphQLstarter/issues"
+    "url": "https://github.com/epixfails/React-GraphQL-sandbox.git/issues"
   },
-  "homepage": "https://github.com/epixfails/graphQLstarter#readme",
+  "homepage": "https://github.com/epixfails/React-GraphQL-sandbox.git#readme",
   "dependencies": {
     "axios": "^0.17.1",
     "babel-core": "^6.26.0",
