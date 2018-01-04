@@ -25,6 +25,11 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    alias: {
+      '~': path.join(__dirname, 'App/src'),
+    },
+  },
   devServer: {
     contentBase: path.join(__dirname, 'App'),
     compress: true,

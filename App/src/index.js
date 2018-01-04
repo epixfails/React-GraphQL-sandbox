@@ -1,11 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import styled from 'styled-components';
+import styled, { injectGlobal } from 'styled-components';
 import 'babel-polyfill';
 import { AddUser } from './components/InputForm';
 import { store } from './store';
-import { Button, UsersList } from './components/UsersList';
+import { UsersList } from './components/UsersList';
+import Init from './Init';
+
+// eslint-disable-next-line
+injectGlobal`
+* {
+  font-family: "Encode Sans Expanded", sans-serif
+}
+`;
 
 const AppWrap = styled.div`
   margin: auto;
@@ -15,9 +23,9 @@ const AppWrap = styled.div`
 const App = () => (
   <Provider store={store}>
     <AppWrap>
+      <Init />
       <AddUser />
       <UsersList />
-      <Button />
     </AppWrap>
   </Provider>
 );

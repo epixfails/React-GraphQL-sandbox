@@ -1,10 +1,11 @@
 export const GET_USERS = 'GET_USERS';
 export const GOT_USERS = 'GOT_USERS';
-export const DELETE_USER = 'DELETE_USER';
+export const USER_DELETE = 'USER_DELETE';
 export const USER_UPDATE_SUCCESS = 'USER_UPDATE_SUCCESS';
 export const USER_UPDATE_ERROR = 'USER_UPDATE_ERROR';
 export const USER_ADD = 'USER_ADD';
 export const USER_ADD_SUCCESS = 'USER_ADD_SUCCESS';
+export const USER_UPDATE = 'USER_UPDATE';
 
 export const addUser = payload => ({
   type: USER_ADD,
@@ -15,12 +16,17 @@ export const getUsers = () => ({
   type: GET_USERS,
 });
 
+export const updateUser = user => ({
+  type: USER_UPDATE,
+  user,
+});
+
 export const deleteUser = id => ({
-  type: DELETE_USER,
+  type: USER_DELETE,
   id,
 });
 
-export const users = (state = {}, action) => {
+export const users = (state = { list: [] }, action) => {
   switch (action.type) {
     case GET_USERS: {
       return {
@@ -48,7 +54,7 @@ export const users = (state = {}, action) => {
         errorFetching: true,
       };
     }
-    case DELETE_USER: {
+    case USER_DELETE: {
       return {
         list: state.list.filter(user => user.id !== action.id),
       };
@@ -64,6 +70,12 @@ export const users = (state = {}, action) => {
         ...state,
         list: [...state.list, action.user],
         isFetching: false,
+      };
+    }
+    case USER_UPDATE: {
+      return {
+        ...state,
+        isFetching: true,
       };
     }
     default: {

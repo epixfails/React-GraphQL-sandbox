@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import ListItem from './ListItem';
 
 const Wrapper = styled.div`
-  width: 100%;
   margin: 40px auto;
 `;
 

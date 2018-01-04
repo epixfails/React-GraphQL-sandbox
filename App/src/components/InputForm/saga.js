@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-import { USER_ADD, USER_ADD_SUCCESS, USER_UPDATE_ERROR } from '../../ducks';
+import { USER_ADD, USER_ADD_SUCCESS, USER_UPDATE_ERROR } from '~/ducks';
 
 export const addUserRequest = user => {
   const query = `mutation { add(name: "${user.name}", address: "${user.address}") { id, name, address } }`;
