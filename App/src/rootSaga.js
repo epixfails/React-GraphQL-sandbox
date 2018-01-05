@@ -1,7 +1,7 @@
 import { all, fork } from 'redux-saga/effects';
-import { addUserSaga } from './components/InputForm';
-import { getUsersSaga } from './components/UsersList';
+import { addNoteSaga } from './components/InputForm';
+import { getNotesSaga } from './components/NotesList';
 
 export default function* rootSaga() {
-  yield all([getUsersSaga, addUserSaga].map(saga => fork(saga)));
+  yield all([getNotesSaga, addNoteSaga].map(saga => fork(saga)));
 }

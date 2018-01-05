@@ -7,18 +7,18 @@ const Wrapper = styled.div`
   margin: 40px auto;
 `;
 
-const UsersList = props => {
-  const { usersArray } = props;
+const NotesList = props => {
+  const { notesArray } = props;
   return (
     <Wrapper>
-      {usersArray.length > 0 &&
-        usersArray.map(user => <ListItem user={user} key={user.id} />)}
+      {notesArray.length > 0 &&
+        notesArray.map(note => <ListItem note={note} key={note.id} />)}
     </Wrapper>
   );
 };
 
 const mapStateToProps = state => ({
-  usersArray: state.users.list || [],
+  notesArray: state.notes.list || [],
 });
 
-export default connect(mapStateToProps)(UsersList);
+export default connect(mapStateToProps)(NotesList);

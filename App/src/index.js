@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import styled, { injectGlobal } from 'styled-components';
 import 'babel-polyfill';
-import { AddUser } from './components/InputForm';
+import { AddNote } from './components/InputForm';
 import { store } from './store';
-import { UsersList } from './components/UsersList';
+import { NotesList } from './components/NotesList';
 import Init from './Init';
 
 // eslint-disable-next-line
 injectGlobal`
 * {
-  font-family: "Encode Sans Expanded", sans-serif
+  font-family: "Encode Sans Expanded", sans-serif;
 }
 `;
 
@@ -24,8 +24,8 @@ const App = () => (
   <Provider store={store}>
     <AppWrap>
       <Init />
-      <AddUser />
-      <UsersList />
+      <AddNote />
+      <NotesList />
     </AppWrap>
   </Provider>
 );

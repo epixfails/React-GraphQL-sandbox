@@ -1,80 +1,86 @@
-export const GET_USERS = 'GET_USERS';
-export const GOT_USERS = 'GOT_USERS';
-export const USER_DELETE = 'USER_DELETE';
-export const USER_UPDATE_SUCCESS = 'USER_UPDATE_SUCCESS';
-export const USER_UPDATE_ERROR = 'USER_UPDATE_ERROR';
-export const USER_ADD = 'USER_ADD';
-export const USER_ADD_SUCCESS = 'USER_ADD_SUCCESS';
-export const USER_UPDATE = 'USER_UPDATE';
+export const GET_NOTES = 'GET_USERS';
+export const GOT_NOTES = 'GOT_USERS';
+export const NOTE_DELETE = 'USER_DELETE';
+export const NOTE_UPDATE_SUCCESS = 'USER_UPDATE_SUCCESS';
+export const NOTE_UPDATE_ERROR = 'USER_UPDATE_ERROR';
+export const NOTE_ADD = 'USER_ADD';
+export const NOTE_ADD_SUCCESS = 'USER_ADD_SUCCESS';
+export const NOTE_UPDATE = 'USER_UPDATE';
 
-export const addUser = payload => ({
-  type: USER_ADD,
+export const addNote = payload => ({
+  type: NOTE_ADD,
   payload,
 });
 
-export const getUsers = () => ({
-  type: GET_USERS,
+export const getNotes = () => ({
+  type: GET_NOTES,
 });
 
-export const updateUser = user => ({
-  type: USER_UPDATE,
-  user,
+export const updateNote = note => ({
+  type: NOTE_UPDATE,
+  note,
 });
 
-export const deleteUser = id => ({
-  type: USER_DELETE,
+export const deleteNote = id => ({
+  type: NOTE_DELETE,
   id,
 });
 
-export const users = (state = { list: [] }, action) => {
+export const notes = (state = { list: [] }, action) => {
   switch (action.type) {
-    case GET_USERS: {
+    case GET_NOTES: {
       return {
         ...state,
         isFetching: true,
       };
     }
-    case GOT_USERS: {
+    case GOT_NOTES: {
       return {
         ...state,
-        list: [...action.users],
+        list: [...action.notes],
         isFetching: false,
       };
     }
-    case USER_UPDATE_SUCCESS: {
+    case NOTE_UPDATE_SUCCESS: {
       return {
         ...state,
         isFetching: false,
       };
     }
-    case USER_UPDATE_ERROR: {
+    case NOTE_UPDATE_ERROR: {
       return {
         ...state,
         isFetching: false,
         errorFetching: true,
       };
     }
-    case USER_DELETE: {
+    case NOTE_DELETE: {
       return {
-        list: state.list.filter(user => user.id !== action.id),
+        list: state.list.filter(note => note.id !== action.id),
       };
     }
-    case USER_ADD: {
+    case NOTE_ADD: {
       return {
         ...state,
         isFetching: true,
       };
     }
-    case USER_ADD_SUCCESS: {
+    case NOTE_ADD_SUCCESS: {
       return {
         ...state,
-        list: [...state.list, action.user],
+        list: [...state.list, action.note],
         isFetching: false,
       };
     }
-    case USER_UPDATE: {
+    case NOTE_UPDATE: {
+      const updatedList = state.list.map(note => {
+        if (note.id === action.note.id) {
+          return { ...note, ...action.note };
+        }
+        return note;
+      });
       return {
-        ...state,
+        list: [...updatedList],
         isFetching: true,
       };
     }

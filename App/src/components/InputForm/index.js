@@ -1,2 +1,2 @@
-export AddUser from './components/AddUser';
-export addUserSaga from './saga';
+export AddNote from './components/AddNote';
+export addNoteSaga from './saga';

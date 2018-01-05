@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUsers } from './ducks';
+import { getNotes } from './ducks';
 
 class Init extends Component {
   componentDidMount() {
-    this.props.getUsers();
+    this.props.getNotes();
   }
   render() {
     return null;
@@ -12,7 +12,7 @@ class Init extends Component {
 }
 
 const mapStateToProps = {
-  getUsers,
+  getNotes,
 };
 
 export default connect(null, mapStateToProps)(Init);

@@ -1,9 +1,9 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-import { USER_ADD, USER_ADD_SUCCESS, USER_UPDATE_ERROR } from '~/ducks';
+import { NOTE_ADD, NOTE_ADD_SUCCESS, NOTE_UPDATE_ERROR } from '~/ducks';
 
-export const addUserRequest = user => {
-  const query = `mutation { add(name: "${user.name}", address: "${user.address}") { id, name, address } }`;
+export const addNoteRequest = note => {
+  const query = `mutation { add(title: "${note.title}", content: "${note.content}") { id, title, content, date_updated } }`;
   return axios
     .post('https://damp-earth-31682.herokuapp.com/api', {
       query,
@@ -11,15 +11,15 @@ export const addUserRequest = user => {
     .then(response => response.data.data.add);
 };
 
-function* addUser(action) {
+function* addNote(action) {
   try {
-    const user = yield call(addUserRequest, action.payload);
-    yield put({ type: USER_ADD_SUCCESS, user });
+    const note = yield call(addNoteRequest, action.payload);
+    yield put({ type: NOTE_ADD_SUCCESS, note });
   } catch (e) {
-    yield put({ type: USER_UPDATE_ERROR, payload: e.message });
+    yield put({ type: NOTE_UPDATE_ERROR, payload: e.message });
   }
 }
 
-export default function* addUserSaga() {
-  yield takeLatest(USER_ADD, addUser);
+export default function* addNoteSaga() {
+  yield takeLatest(NOTE_ADD, addNote);
 }

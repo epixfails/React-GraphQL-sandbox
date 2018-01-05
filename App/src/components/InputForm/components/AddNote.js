@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { addUser } from '~/ducks';
+import { addNote } from '~/ducks';
 
 const Wrapper = styled.form`
   display: flex;
-  justify-content: space-between;
+  flex-flow: column;
   margin: 10px auto;
 `;
 
 const Input = styled.input`
   display: block;
   box-sizing: border-box;
-  width: 37%;
+  width: 100%;
+  margin-bottom: 15px;
   padding: 5px 10px;
   font-size: 18px;
   border: 1px #252525 solid;
@@ -35,7 +36,7 @@ const Button = styled.button`
   }
 `;
 
-class AddUser extends Component {
+class AddNote extends Component {
   getNameRef = input => {
     this.nameInput = input;
   };
@@ -49,9 +50,9 @@ class AddUser extends Component {
 
   handleAdd(e) {
     e.preventDefault();
-    this.props.addUser({
-      name: this.nameInput.value.trim() || 'not specified',
-      address: this.addressInput.value.trim() || 'not specified',
+    this.props.addNote({
+      title: this.nameInput.value.trim() || 'not specified',
+      content: this.addressInput.value.trim() || 'not specified',
     });
     this.form.reset();
   }
@@ -59,20 +60,20 @@ class AddUser extends Component {
   render() {
     return (
       <Wrapper innerRef={this.getFormRef} onSubmit={e => this.handleAdd(e)}>
-        <Input innerRef={this.getNameRef} placeholder="Name" />
-        <Input innerRef={this.getAddressRef} placeholder="Name 2" />
-        <Button>Add to list</Button>
+        <Input innerRef={this.getNameRef} placeholder="Title" />
+        <Input innerRef={this.getAddressRef} placeholder="Content" />
+        <Button>Add note</Button>
       </Wrapper>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  users: state.users,
+  notes: state.notes,
 });
 
 const mapDispatchToProps = {
-  addUser,
+  addNote,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddUser);
+export default connect(mapStateToProps, mapDispatchToProps)(AddNote);
