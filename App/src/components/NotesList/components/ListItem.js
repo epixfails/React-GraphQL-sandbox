@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { getDateFormatted } from '~/utils';
@@ -6,7 +6,7 @@ import { deleteNote, updateNote } from '~/ducks';
 import { setEditor, Editor } from '../../Editor';
 
 const Wrapper = styled.div`
-  padding: 10px 0;
+  padding: 10px;
   margin-bottom: 10px;
   cursor: pointer;
   transition: all 0.3s;
@@ -58,47 +58,30 @@ const ButtonAction = styled.a`
   }
 `;
 
-class ListItem extends Component {
-  state = {
-    id: this.props.note.id,
-    title: this.props.note.title,
-    content: this.props.note.content,
-  };
-
-  handleSave = () => {
-    const { id, title, content } = this.state;
-    this.props.updateNote({
-      id,
-      title,
-      content,
-    });
-  };
-
-  render() {
-    const { note, noteInEditor } = this.props;
-    const isEdited = noteInEditor.id === note.id;
-    return (
-      <div>
-        {isEdited ? (
-          <Editor />
-        ) : (
-          <Wrapper onClick={() => this.props.setEditor(note)}>
-            <DateEdited>
-              Created: {getDateFormatted(note.date_updated)}
-            </DateEdited>
-            <NoteContent>
-              <Text>{note.title}</Text>
-              <Text content>{note.content}</Text>
-              <ButtonAction onClick={() => this.props.deleteNote(note.id)}>
-                remove
-              </ButtonAction>
-            </NoteContent>
-          </Wrapper>
-        )}
-      </div>
-    );
-  }
-}
+const ListItem = props => {
+  const { note, noteInEditor } = props;
+  const isEdited = noteInEditor.id === note.id;
+  return (
+    <div>
+      {isEdited ? (
+        <Editor />
+      ) : (
+        <Wrapper onClick={() => props.setEditor(note)}>
+          <DateEdited>
+            Created: {getDateFormatted(note.date_updated)}
+          </DateEdited>
+          <NoteContent>
+            <Text>{note.title}</Text>
+            <Text content="true">{note.content}</Text>
+            <ButtonAction onClick={() => props.deleteNote(note.id)}>
+              remove
+            </ButtonAction>
+          </NoteContent>
+        </Wrapper>
+      )}
+    </div>
+  );
+};
 
 const mapStateToProps = state => ({
   noteInEditor: state.editor,

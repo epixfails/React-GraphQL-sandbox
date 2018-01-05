@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import arrow from '~/svg/arrow-up.svg';
 import { updateNote, deleteNote } from '~/ducks';
 import { changeNote, setEditor } from './ducks';
 
 const Wrapper = styled.div`
-  width: 100%;
   display: flex;
   flex-flow: column;
+  width: 100%;
+  position: relative;
+  padding: 10px;
+  box-sizing: border-box;
   background: #f3f3f3;
-  padding: 5px;
+
+  > svg {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+  }
 `;
 
 const Input = styled.input`
+  display: block;
+  box-sizing: border-box;
   width: 100%;
   font-size: 18px;
   margin-bottom: 10px;
@@ -87,11 +101,18 @@ class Editor extends Component {
     this.props.setEditor({});
   };
 
+  ButtonClose = () => (
+    <svg onClick={() => this.props.setEditor({})}>
+      <use xlinkHref={`#${arrow.id}`} />
+    </svg>
+  );
+
   render() {
     const { note } = this.props;
 
     return (
       <Wrapper>
+        {this.ButtonClose()}
         <Input
           innerRef={this.getTitleRef}
           value={note.title}
