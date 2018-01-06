@@ -9,32 +9,23 @@ import {
   NOTE_UPDATE,
 } from '~/ducks';
 
-const userQuery = 'query { notes { id, title, content, date_updated } }';
-
-export const getNotes = () =>
+const apiRequest = (query, callback) =>
   axios
-    .get(`https://damp-earth-31682.herokuapp.com/api?query=${userQuery}`, {
-      headers: {
-        'Content-Type': 'application/graphql',
-      },
+    .post('https://damp-earth-31682.herokuapp.com/api', {
+      query,
     })
-    .then(response => response.data.data.notes);
-
-export const deleteNoteRequest = id => {
-  const query = `mutation { delete(id: "${id}") { title, content } }`;
-  axios.post('https://damp-earth-31682.herokuapp.com/api', {
-    query,
-  });
-};
-
-export const updateNoteRequest = note => {
-  const query = `mutation { update(id: "${note.id}", title: "${note.title}", content: "${note.content}") { id, title, content } }`;
-  axios.post('https://damp-earth-31682.herokuapp.com/api', { query });
-};
+    .then(data => {
+      if (callback) return callback(data);
+      return data;
+    });
 
 function* getNotesArray() {
   try {
-    const notes = yield call(getNotes);
+    const notes = yield call(
+      apiRequest,
+      'query { notes { id, title, content, date_updated } }',
+      response => response.data.data.notes,
+    );
     yield put({ type: GOT_NOTES, notes });
   } catch (e) {
     yield put({ type: NOTE_UPDATE_ERROR, message: e.message });
@@ -42,8 +33,12 @@ function* getNotesArray() {
 }
 
 function* updateNoteById(action) {
+  const { note } = action;
   try {
-    yield call(updateNoteRequest, action.note);
+    yield call(
+      apiRequest,
+      `mutation { update(id: "${note.id}", title: "${note.title}", content: "${note.content}") { id } }`,
+    );
     yield put({ type: NOTE_UPDATE_SUCCESS });
   } catch (e) {
     yield put({ type: NOTE_UPDATE_ERROR, message: e.message });
@@ -51,8 +46,12 @@ function* updateNoteById(action) {
 }
 
 function* deleteNoteById(action) {
+  const { id } = action;
   try {
-    const note = yield call(deleteNoteRequest, action.id);
+    const note = yield call(
+      apiRequest,
+      `mutation { delete(id: "${id}") { title, content } }`,
+    );
     yield put({ type: NOTE_UPDATE_SUCCESS, note });
   } catch (e) {
     yield put({ type: NOTE_UPDATE_ERROR, message: e.message });
