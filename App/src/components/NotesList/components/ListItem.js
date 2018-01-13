@@ -2,12 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { getDateFormatted } from '~/utils';
-import { deleteNote, updateNote } from '~/ducks';
-import { setEditor, Editor } from '../../Editor';
+import { deleteNote, updateNote } from '@/notes';
+import { setEditor } from '@/editor';
+import { setFilter } from '@/filter';
+import { categoryColors } from '~/components/common/styles';
+import { Editor } from '../../Editor';
 
 const Wrapper = styled.div`
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 15px 10px;
   cursor: pointer;
   transition: all 0.3s;
 
@@ -15,6 +17,15 @@ const Wrapper = styled.div`
     background: #90caf9;
   }
 `;
+
+const Label = styled.div`
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  ${({ category }) => `background: ${categoryColors[category]}`};
+`;
+
 const Text = styled.span`
   display: block;
   height: 24px;
@@ -37,6 +48,13 @@ const DateEdited = styled.p`
 const NoteContent = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
+
+const Content = styled.div`
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
 `;
 
@@ -66,17 +84,23 @@ const ListItem = props => {
       {isEdited ? (
         <Editor />
       ) : (
-        <Wrapper onClick={() => props.setEditor(note)}>
+        <Wrapper>
           <DateEdited>
             Created: {getDateFormatted(note.date_updated)}
           </DateEdited>
-          <NoteContent>
-            <Text>{note.title}</Text>
-            <Text content="true">{note.content}</Text>
-            <ButtonAction onClick={() => props.deleteNote(note.id)}>
-              remove
-            </ButtonAction>
-          </NoteContent>
+          <Content>
+            <Label
+              category={note.category}
+              onClick={() => props.setFilter(note.category)}
+            />
+            <NoteContent onClick={() => props.setEditor(note)}>
+              <Text>{note.title}</Text>
+              <Text content="true">{note.content}</Text>
+              <ButtonAction onClick={() => props.deleteNote(note.id)}>
+                remove
+              </ButtonAction>
+            </NoteContent>
+          </Content>
         </Wrapper>
       )}
     </div>
@@ -91,6 +115,7 @@ const mapDispatchToProps = {
   deleteNote,
   updateNote,
   setEditor,
+  setFilter,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListItem);

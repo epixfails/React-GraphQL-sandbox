@@ -28,6 +28,7 @@ module.exports = {
   resolve: {
     alias: {
       '~': path.join(__dirname, 'App/src'),
+      '@': path.join(__dirname, 'App/src/ducks'),
     },
   },
   devServer: {

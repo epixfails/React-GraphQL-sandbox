@@ -20,7 +20,7 @@ export const editor = (state = {}, action) => {
       return { ...action.note };
     }
     default: {
-      return { ...state };
+      return state;
     }
   }
 };

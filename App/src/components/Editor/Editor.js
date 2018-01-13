@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import arrow from '~/svg/arrow-up.svg';
-import { updateNote, deleteNote } from '~/ducks';
-import { changeNote, setEditor } from './ducks';
+import { updateNote, deleteNote } from '@/notes';
+import { changeNote, setEditor } from '@/editor';
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   position: relative;
   padding: 10px;
   box-sizing: border-box;
-  background: #f3f3f3;
+  background: #fdfdfd;
 
   > svg {
     position: absolute;
@@ -30,6 +30,7 @@ const Input = styled.input`
   width: 100%;
   font-size: 18px;
   margin-bottom: 10px;
+  padding-right: 20px;
   line-height: 24px;
   border: none;
   background: transparent;
@@ -56,6 +57,10 @@ const InputContent = styled.textarea`
   box-sizing: border-box;
   background: transparent;
   resize: none;
+
+  & :focus {
+    outline: none;
+  }
 `;
 
 const Button = styled.button`
@@ -64,13 +69,16 @@ const Button = styled.button`
   padding: 5px 7px;
   font-size: 14px;
   border: none;
+  border-radius: 5px;
   background: transparent;
+  transition: 0.3s;
   cursor: pointer;
 
   ${({ save }) => (save ? 'color: #4a148c' : 'color: #e57373')};
 
   & :hover {
     background: #90caf9;
+    color: #fff;
   }
 `;
 
@@ -120,6 +128,7 @@ class Editor extends Component {
           onKeyUp={this.handleKeyUp}
         />
         <InputContent
+          rows="5"
           innerRef={this.getContentRef}
           value={note.content}
           onChange={this.handleKeyUp}

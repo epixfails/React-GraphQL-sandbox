@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { getNotes } from './ducks';
+import { getNotes } from '@/notes';
 
 class Init extends Component {
   componentDidMount() {

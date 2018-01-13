@@ -1,11 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-import { NOTE_ADD, NOTE_ADD_SUCCESS, NOTE_UPDATE_ERROR } from '~/ducks';
+import { NOTE_ADD, NOTE_ADD_SUCCESS, NOTE_UPDATE_ERROR } from '@/notes';
 
 export const addNoteRequest = note => {
-  const query = `mutation { add(title: "${note.title}", content: "${note.content}") { id, title, content, date_updated } }`;
+  const query = `mutation { add(title: "${note.title}", content: "${note.content}", category: "${note.category}") { id, title, content, category, date_updated } }`;
   return axios
-    .post('https://damp-earth-31682.herokuapp.com/api', {
+    .post('http://localhost:8080/api', {
       query,
     })
     .then(response => response.data.data.add);

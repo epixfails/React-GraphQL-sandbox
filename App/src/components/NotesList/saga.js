@@ -7,11 +7,11 @@ import {
   NOTE_UPDATE_ERROR,
   NOTE_DELETE,
   NOTE_UPDATE,
-} from '~/ducks';
+} from '@/notes';
 
 const apiRequest = (query, callback) =>
   axios
-    .post('https://damp-earth-31682.herokuapp.com/api', {
+    .post('http://localhost:8080/api', {
       query,
     })
     .then(data => {
@@ -23,7 +23,7 @@ function* getNotesArray() {
   try {
     const notes = yield call(
       apiRequest,
-      'query { notes { id, title, content, date_updated } }',
+      'query { notes { id, title, content, date_updated, category } }',
       response => response.data.data.notes,
     );
     yield put({ type: GOT_NOTES, notes });
@@ -37,7 +37,7 @@ function* updateNoteById(action) {
   try {
     yield call(
       apiRequest,
-      `mutation { update(id: "${note.id}", title: "${note.title}", content: "${note.content}") { id } }`,
+      `mutation { update(id: "${note.id}", title: "${note.title}", content: "${note.content}", category: "${note.category}") { id } }`,
     );
     yield put({ type: NOTE_UPDATE_SUCCESS });
   } catch (e) {

@@ -12,12 +12,20 @@ import Init from './Init';
 injectGlobal`
 * {
   font-family: "Encode Sans Expanded", sans-serif;
+  margin: 0;
+
+  input {
+    outline: none;
+  }
 }
 `;
 
 const AppWrap = styled.div`
   margin: auto;
-  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100%;
 `;
 
 const App = () => (
@@ -29,5 +37,5 @@ const App = () => (
     </AppWrap>
   </Provider>
 );
-
+// eslint-disable-next-line
 ReactDOM.render(<App />, document.querySelector('.root'));
