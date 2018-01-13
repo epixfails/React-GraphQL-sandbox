@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { addNote } from '@/notes';
+import { categories } from '~/components/common/categories';
 import { CategorySelect } from './CategorySelect';
 
 const Wrapper = styled.form`
@@ -11,7 +12,7 @@ const Wrapper = styled.form`
   height: 100%;
   padding: 15px 5px;
   background: rgba(144, 202, 249, 0.2);
-  box-shadow: 4px 0px 21px -2px rgba(62, 166, 251, 1);
+  box-shadow: 4px 0px 21px -2px rgba(0, 0, 0, 0.3);
 `;
 
 const Input = styled.input`
@@ -116,7 +117,7 @@ class AddNote extends Component {
           rows="5"
         />
         <CategorySelect
-          categories={['important', 'work', 'personal', 'other']}
+          categories={Object.keys(categories)}
           selected={this.state.category}
           handleChange={this.handleCategoryChange}
         />

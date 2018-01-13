@@ -5,7 +5,7 @@ import { getDateFormatted } from '~/utils';
 import { deleteNote, updateNote } from '@/notes';
 import { setEditor } from '@/editor';
 import { setFilter } from '@/filter';
-import { categoryColors } from '~/components/common/styles';
+import { categories } from '~/components/common/categories';
 import { Editor } from '../../Editor';
 
 const Wrapper = styled.div`
@@ -23,7 +23,7 @@ const Label = styled.div`
   height: 20px;
   margin-right: 10px;
   cursor: pointer;
-  ${({ category }) => `background: ${categoryColors[category]}`};
+  ${({ category }) => `background: ${categories[category]}`};
 `;
 
 const Text = styled.span`

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { categoryColors } from '~/components/common/styles';
+import { categories } from '~/components/common/categories';
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,11 +22,11 @@ const Item = styled.div`
 
   ${({ active, item }) =>
     active
-      ? `background: ${categoryColors[item]}; color: #fff;`
+      ? `background: ${categories[item]}; color: #fff;`
       : 'background: #fff; color: #90caf9;'};
 
   & :hover {
-    ${({ item }) => `background: ${categoryColors[item]}`};
+    ${({ item }) => `background: ${categories[item]}`};
     color: #fff;
   }
 `;
