@@ -45,7 +45,6 @@ const InputContent = styled.textarea`
 `;
 
 const Button = styled.button`
-  display: block;
   line-height: 24px;
   font-size: 18px;
   padding: 10px;

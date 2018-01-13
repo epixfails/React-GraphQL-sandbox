@@ -34,13 +34,7 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-saga": "^0.16.0",
     "styled-components": "^2.4.0",
-    "svg-sprite-loader": "^3.6.2",
-    "body-parser": "^1.18.2",
-    "cors": "^2.8.4",
-    "express": "^4.16.2",
-    "express-graphql": "^0.6.11",
-    "graphql": "^0.12.3",
-    "mongoose": "^5.0.0-rc0"
+    "svg-sprite-loader": "^3.6.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
