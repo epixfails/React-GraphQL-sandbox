@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { getDateFormatted } from '~/utils';
-import { deleteNote, updateNote } from '@/notes';
-import { setEditor } from '@/editor';
-import { setFilter } from '@/filter';
+import { deleteNote, updateNote } from '~/ducks/notes';
+import { setEditor } from '~/ducks/editor';
+import { setFilter } from '~/ducks/filter';
 import { categories } from '~/components/common/categories';
 import { Editor } from '../../Editor';
 

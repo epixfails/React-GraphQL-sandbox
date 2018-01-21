@@ -1,5 +1,5 @@
 const SET_NOTE_EDITOR = 'SET_NOTE_EDITOR';
-const CHANGE_NOTE_EDITOR = 'SET_NOTE_EDITOR';
+const CHANGE_NOTE_EDITOR = 'CHANGE_NOTE_EDITOR';
 
 export const setEditor = note => ({
   type: SET_NOTE_EDITOR,

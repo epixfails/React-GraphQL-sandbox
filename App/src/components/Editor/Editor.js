@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import arrow from '~/svg/arrow-up.svg';
-import { updateNote, deleteNote } from '@/notes';
-import { changeNote, setEditor } from '@/editor';
+import { updateNote, deleteNote } from '~/ducks/notes';
+import { changeNote, setEditor } from '~/ducks/editor';
+import arrow from '../svg/arrow-up.svg';
 
 const Wrapper = styled.div`
   display: flex;
@@ -86,9 +86,16 @@ class Editor extends Component {
   getTitleRef = ref => {
     this.titleInput = ref;
   };
+
   getContentRef = ref => {
     this.contentInput = ref;
   };
+
+  getButtonClose = () => (
+    <svg onClick={() => this.props.setEditor({})}>
+      <use xlinkHref={`#${arrow.id}`} />
+    </svg>
+  );
 
   handleKeyUp = e => {
     const { note } = this.props;
@@ -109,18 +116,12 @@ class Editor extends Component {
     this.props.setEditor({});
   };
 
-  ButtonClose = () => (
-    <svg onClick={() => this.props.setEditor({})}>
-      <use xlinkHref={`#${arrow.id}`} />
-    </svg>
-  );
-
   render() {
     const { note } = this.props;
 
     return (
       <Wrapper>
-        {this.ButtonClose()}
+        {this.getButtonClose()}
         <Input
           innerRef={this.getTitleRef}
           value={note.title}

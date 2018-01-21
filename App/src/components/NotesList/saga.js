@@ -7,11 +7,11 @@ import {
   NOTE_UPDATE_ERROR,
   NOTE_DELETE,
   NOTE_UPDATE,
-} from '@/notes';
+} from '~/ducks/notes';
 
 const apiRequest = (query, callback) =>
   axios
-    .post('http://localhost:8080/api', {
+    .post('https://damp-earth-31682.herokuapp.com/api', {
       query,
     })
     .then(data => {

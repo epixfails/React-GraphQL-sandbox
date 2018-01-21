@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { addNote } from '@/notes';
+import { addNote } from '~/ducks/notes';
 import { categories } from '~/components/common/categories';
 import { CategorySelect } from './CategorySelect';
 

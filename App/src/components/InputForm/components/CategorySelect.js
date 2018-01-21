@@ -32,10 +32,10 @@ const Item = styled.div`
 `;
 
 export const CategorySelect = props => {
-  const { categories, selected, handleChange } = props;
+  const { selected, handleChange } = props;
   return (
     <Wrapper>
-      {categories.map((item, i) => (
+      {props.categories.map((item, i) => (
         <Item
           key={i}
           item={item}

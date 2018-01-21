@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CategorySelect /> should render CategorySelect 1`] = `
+<CategorySelect__Wrapper>
+  <CategorySelect__Item
+    active={false}
+    item={1}
+    key="0"
+    onClick={[Function]}
+  >
+    1
+  </CategorySelect__Item>
+  <CategorySelect__Item
+    active={false}
+    item={2}
+    key="1"
+    onClick={[Function]}
+  >
+    2
+  </CategorySelect__Item>
+  <CategorySelect__Item
+    active={false}
+    item={3}
+    key="2"
+    onClick={[Function]}
+  >
+    3
+  </CategorySelect__Item>
+</CategorySelect__Wrapper>
+`;
