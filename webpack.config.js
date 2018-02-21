@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const PATHS = {
   source: path.join(__dirname, 'App/src'),
@@ -10,7 +12,7 @@ module.exports = {
   output: {
     path: PATHS.build,
     publicPath: '/',
-    filename: 'main.js',
+    filename: "[name].js",
   },
   module: {
     rules: [
@@ -36,4 +38,14 @@ module.exports = {
     compress: true,
     port: 9000,
   },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: module => {
+        const context = module.context;
+        return context && context.indexOf('node_modules') >= 0;
+      },
+    }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|ru/),
+  ],
 };
