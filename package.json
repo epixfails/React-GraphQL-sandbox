@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --progress --port 3000 --inline",
     "watch": "webpack --watch",
-    "build": "webpack --progress -p",
+    "build": "webpack",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
