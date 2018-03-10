@@ -20,16 +20,12 @@
     "url": "https://github.com/epixfails/React-GraphQL-sandbox.git/issues"
   },
   "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "moduleNameMapper": {
       "^~(.*)$": "<rootDir>/App/src/$1",
       "^.+\\.svg$": "<rootDir>/App/src/__tests/svgTransform.js"
     },
-    "testPathIgnorePatterns": [
-      "./node_modules/"
-    ]
+    "testPathIgnorePatterns": ["./node_modules/"]
   },
   "homepage": "https://github.com/epixfails/React-GraphQL-sandbox.git#readme",
   "dependencies": {
@@ -66,7 +62,7 @@
     "jest": "^22.1.4",
     "redux-mock-store": "^1.4.0",
     "uglifyjs-webpack-plugin": "^1.1.8",
-    "webpack": "^3.10.0",
+    "webpack": "3.10.0",
     "webpack-dev-server": "^2.9.7"
   }
 }
