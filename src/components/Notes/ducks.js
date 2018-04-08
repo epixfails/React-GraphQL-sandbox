@@ -26,7 +26,7 @@ export const deleteNote = id => ({
   id,
 });
 
-export const notes = (state = { list: [] }, action) => {
+export const notesReducer = (state = { list: [] }, action) => {
   switch (action.type) {
     case GET_NOTES: {
       return {

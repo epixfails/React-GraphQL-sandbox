@@ -3,11 +3,12 @@ const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const PATHS = {
-  source: path.join(__dirname, 'App/src'),
-  build: path.join(__dirname, 'App/public'),
+  source: path.join(__dirname, 'src'),
+  build: path.join(__dirname, 'public'),
 };
 
 module.exports = {
+  mode: 'development',
   entry: `${PATHS.source}/index.js`,
   output: {
     path: PATHS.build,
@@ -29,23 +30,27 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '~': path.join(__dirname, 'App/src'),
-      '@': path.join(__dirname, 'App/src/ducks'),
+      '~': path.join(__dirname, 'src'),
     },
   },
   devServer: {
-    contentBase: path.join(__dirname, 'App'),
+    contentBase: path.join(__dirname, '/'),
     compress: true,
     port: 9000,
+    historyApiFallback: true,
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: module => {
-        const context = module.context;
-        return context && context.indexOf('node_modules') >= 0;
-      },
-    }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|ru/),
   ],
 };

@@ -1,14 +1,12 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { editor, notes, filter } from '~/ducks';
+import { rootReducer } from './reducer';
 import rootSaga from './rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const initialState = {};
-
-const rootReducer = combineReducers({ notes, editor, filter });
 
 const store = createStore(
   rootReducer,

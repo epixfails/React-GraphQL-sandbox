@@ -2,11 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { getDateFormatted } from '~/utils';
-import { deleteNote, updateNote } from '~/ducks/notes';
-import { setEditor } from '~/ducks/editor';
-import { setFilter } from '~/ducks/filter';
+import { deleteNote, updateNote } from '~/components/Notes/ducks';
 import { categories } from '~/components/common/categories';
-import { Editor } from '../../Editor';
+import { setEditor, Editor } from '~/components/Editor';
+import { setFilter } from '../ducks';
 
 const Wrapper = styled.div`
   padding: 15px 10px;

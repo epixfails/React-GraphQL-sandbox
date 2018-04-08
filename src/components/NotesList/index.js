@@ -1,2 +1,2 @@
 export NotesList from './components/NotesList';
-export getNotesSaga from './saga';
+export { filterReducer } from './ducks';

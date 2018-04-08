@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { updateNote, deleteNote } from '~/ducks/notes';
-import { changeNote, setEditor } from '~/ducks/editor';
+import { updateNote, deleteNote } from '~/components/Notes/ducks';
+import { changeNote, setEditor } from './ducks';
 import arrow from '../svg/arrow-up.svg';
 
 const Wrapper = styled.div`

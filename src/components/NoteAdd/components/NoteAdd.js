@@ -1,7 +1,9 @@
+// @flow
+
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { addNote } from '~/ducks/notes';
+import { addNote } from '~/components/Notes/ducks';
 import { categories } from '~/components/common/categories';
 import { CategorySelect } from './CategorySelect';
 
@@ -61,38 +63,53 @@ const Button = styled.button`
   }
 `;
 
-class AddNote extends Component {
+type Props = {
+  notes: Array<mixed>,
+  addNote: Function,
+};
+
+type State = {
+  category: string,
+};
+
+class NoteAdd extends Component<Props, State> {
   state = {
     category: 'other',
   };
-  getNameRef = input => {
+
+  nameInput: HTMLInputElement;
+  addressInput: HTMLInputElement;
+  form: HTMLFormElement;
+  categoryInput: HTMLFormElement;
+
+  getNameRef = (input: HTMLInputElement) => {
     this.nameInput = input;
   };
-  getAddressRef = input => {
+  getAddressRef = (input: HTMLInputElement) => {
     this.addressInput = input;
   };
 
-  getFormRef = form => {
+  getFormRef = (form: HTMLFormElement) => {
     this.form = form;
   };
 
-  getCategoryRef = form => {
+  getCategoryRef = (form: HTMLFormElement) => {
     this.categoryInput = form;
   };
 
-  handleCategoryChange = category => {
+  handleCategoryChange = (category: string) => {
     this.setState({
       category,
     });
   };
 
-  handleKeyUp = e => {
+  handleKeyUp = (e: SyntheticKeyboardEvent<>) => {
     if (e.keyCode === 13) {
       this.handleAdd(e);
     }
   };
 
-  handleAdd(e) {
+  handleAdd(e: SyntheticEvent<>) {
     e.preventDefault();
     this.props.addNote({
       title: this.nameInput.value.trim() || 'not specified',
@@ -104,7 +121,7 @@ class AddNote extends Component {
 
   render() {
     return (
-      <Wrapper innerRef={this.getFormRef} onSubmit={e => this.handleAdd(e)}>
+      <Wrapper innerRef={this.getFormRef} onSubmit={this.handleAdd}>
         <Input
           innerRef={this.getNameRef}
           placeholder="Title"
@@ -135,4 +152,4 @@ const mapDispatchToProps = {
   addNote,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddNote);
+export default connect(mapStateToProps, mapDispatchToProps)(NoteAdd);

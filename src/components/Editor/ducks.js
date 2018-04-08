@@ -11,7 +11,7 @@ export const changeNote = note => ({
   note,
 });
 
-export const editor = (state = {}, action) => {
+export const editorReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_NOTE_EDITOR: {
       return action.note;

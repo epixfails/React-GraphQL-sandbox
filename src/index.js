@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import styled, { injectGlobal } from 'styled-components';
 import 'babel-polyfill';
-import { AddNote } from './components/InputForm';
+import { NoteAdd } from './components/NoteAdd';
 import { store } from './store';
 import { NotesList } from './components/NotesList';
 import Init from './Init';
@@ -32,7 +32,7 @@ const App = () => (
   <Provider store={store}>
     <AppWrap>
       <Init />
-      <AddNote />
+      <NoteAdd />
       <NotesList />
     </AppWrap>
   </Provider>
